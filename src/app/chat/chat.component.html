@@ -1,0 +1,50 @@
+<nav class="navbar navbar-light bg-wihte">
+  <a class="navbar-brand" class="title">Tame the fox ! </a>
+  <form class="form-inline">
+      Vous êtes :
+      <img src="assets/img/{{connectedUser.mood}}.png" class="mr-3">
+      {{connectedUser.email}}<br />
+      <button class="btn btn-outline-primary">Changer d'humeur</button>
+
+  </form>
+  <div>
+    <button class="btn btn-outline-primary mr-2">Voir mon profil</button>
+    <button class="btn btn-outline-primary"  (click)="logout()">
+      Me déconnecter
+    </button>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row my-3">
+    <div class="col-3">
+      <div class="row">
+        <div class="col-12">
+          <h5 class="title">Connecté.e.s <small></small></h5>
+        </div>
+      </div>
+      <div class="row my-2 chatRoomMood">
+        <div class="col-4">
+          <img src="assets/img/sunny.png" class="mr-2">(20%)
+        </div>
+        <div class="col-4">
+          <img src="assets/img/clouds.png" class="mr-2">(60%)
+        </div>
+        <div class="col-4">
+          <img src="assets/img/questions.png" class="mr-2">(20%)
+        </div>
+      </div>
+      <ul class="list-group userlist">
+        <ng-container *ngFor="let user of userList; let i = index" >
+          <li
+            *ngIf="user.email != connectedUser.email"
+            (click)="createComponent(connectedUser, user, i)"
+            class="list-group-item">
+            <img src="assets/img/{{user.mood}}.png" class="mr-3">{{user.email}}</li>
+        </ng-container>
+      </ul>
+    </div>
+    <div class="col-9">
+      <ng-template #chatpanelsContainer></ng-template>
+    </div>
+  </div>
+</div>
