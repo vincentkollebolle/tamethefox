@@ -10,7 +10,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { ChatpanelComponent } from './chatpanel/chatpanel.component';
 import { TameboxComponent } from './tamebox/tamebox.component';
-import { EditboxComponent } from './editbox/editbox.component';
 import { LoginComponent } from './login/login.component';
 import { ChatComponent } from './chat/chat.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
@@ -20,7 +19,6 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
     AppComponent,
     ChatpanelComponent,
     TameboxComponent,
-    EditboxComponent,
     LoginComponent,
     ChatComponent,
     DateAgoPipe

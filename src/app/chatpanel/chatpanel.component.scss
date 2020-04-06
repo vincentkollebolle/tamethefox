@@ -6,12 +6,12 @@
   flex: 1
 }
 .chatmessages {
-  height: 600px;
+  height: 590px;
   overflow: scroll;
 }
 .profile {
   overflow: scroll;
-  height:404px;
+  height:390px;
 }
 .chat.card {
   border-bottom: 0;
@@ -49,3 +49,4 @@
   background:#efefef;
 }
 .tofrom {}
+.profilemsg { border: 1px solid #efefef; }

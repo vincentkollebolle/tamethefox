@@ -10,12 +10,13 @@ import { Subject } from 'rxjs';
   styleUrls: ['./chatpanel.component.scss']
 })
 export class ChatpanelComponent implements OnInit {
-  @Input() user;
 
   connectedUser;
   selectedBox = "profilebox";
   chatMessages; // chatmessages on the server
   msg2send ;  //the message to send (ngModel)
+  profilEntry2send;
+  profileEntries;
 
   // The user we want to chat to
   @Input('from') from;
@@ -50,8 +51,7 @@ export class ChatpanelComponent implements OnInit {
       })
     });
 
-    /*
-    this.profileSrv.getEntries(this.user).subscribe(data => {
+    this.profileSrv.getEntries(this.to).subscribe(data => {
       this.profileEntries = data.map(e => {
         return {
           createdAt: e.createdAt.toDate(),
@@ -61,7 +61,7 @@ export class ChatpanelComponent implements OnInit {
           content: e.content
         };
       })
-    });*/
+    });
   }
 
   selectBox(boxname) {
@@ -71,6 +71,11 @@ export class ChatpanelComponent implements OnInit {
   sendMessage(){
     this.chatSrv.addEntry(this.from, this.to, this.msg2send);
     this.msg2send = null;
+  }
+
+  addEntryToProfile() {
+    this.profileSrv.addEntry(this.from, this.to, this.profilEntry2send);
+    this.profilEntry2send = null;
   }
 
   destroy() {

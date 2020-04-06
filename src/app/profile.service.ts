@@ -16,13 +16,13 @@ export class ProfileService {
     return this.firestore.collection<any>('profile',ref => ref.where('to', '==', to.email)).valueChanges();
   }
 
-  addEntry(){
+  addEntry(from, to, msgcontent){
     //createdAt
     let entry2add = {
-      from: "userFrom",
+      from: from.email,
       fromTimestamp: new Date(),
-      to: "userTo",
-      content: "contenu de test",
+      to: to.email,
+      content: msgcontent,
       createdAt: new Date()
     }
     return this.firestore.collection('profile').add(entry2add);

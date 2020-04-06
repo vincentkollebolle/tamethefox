@@ -3,8 +3,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 body {
   font-family: 'Roboto', sans-serif;
-  background: #efefef;
-  background: linear-gradient(to right, #fff, #efefff, #efefef);
+  background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(239,239,255,1) 0%, rgba(239,239,239,1) 100%);
 }
 .title { font-family: 'Pacifico', cursive; }
 
