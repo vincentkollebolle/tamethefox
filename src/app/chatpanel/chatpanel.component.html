@@ -52,7 +52,7 @@
 
   </div>
   <!--profile-->
-  <div class="col-6 my-3">
+  <div class="col-6 my-3" style="border-left:1px solid #efefef;">
     <div class="row">
       <div class="col-12">
         <h4 class="title">Vous chattez avec </h4>
@@ -70,13 +70,13 @@
     </div>
     <div class=" bg-white profile">
       <div class="col-12 p-0">
-        <!--TODO: show if observable empty
+        <div *ngIf="!profileEntries || profileEntries?.length===0">
           <div class="text-center">
-          <img src="assets/img/foxlogogrey.jpg" style="width:60%"><br />
-          Ce profil est vide pour le moment...<br />
-          Soyez le ou la première à écrire dedans !
+            <img src="assets/img/foxlogogrey.jpg" style="width:60%"><br />
+            Ce profil est vide pour le moment...<br />
+            Soyez le ou la première à écrire dedans !
+          </div>
         </div>
-        -->
         <div
           class="profilemsg p-3 my-2"
            #scrollMe [scrollTop]="scrollMe.scrollHeight"

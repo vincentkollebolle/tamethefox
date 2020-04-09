@@ -1,0 +1,45 @@
+<div class="row"  *ngIf="moodSelectorTabActive">
+  <div class="col-6">
+    <label>Votre humeur: </label>
+  </div>
+  <div class="col-6">
+    <div class="btn-group btn-group-sm" role="group">
+      <button
+        class="btn btn-outline-light"
+        [class.active]="mood == 'sunny'"
+        (click)="changeActualMood('sunny')">
+          <img src="assets/img/sunny.png">
+      </button>
+      <button
+        class="btn btn-outline-light"
+        [class.active]="mood == 'clouds'"
+        (click)="changeActualMood('clouds')">
+          <img src="assets/img/clouds.png">
+      </button>
+      <button
+        class="btn btn-outline-light"
+        [class.active]="mood == 'questions'"
+        (click)="changeActualMood('questions')">
+          <img src="assets/img/questions.png">
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="form-group row" *ngIf="thanksTabActive">
+  <label for="thanksSomeone" class="col-form-label mr-3">Remercier quelqu'un ?  </label>
+  <select id="thanksSomeone" class="form-control">
+    <option *ngFor="let user of userList" [ngValue]="user.email">
+      <div *ngIf="user.email != connectedUser.email; else elseBlock">
+        {{user.email}} 
+      </div>
+      <ng-template #elseBlock>
+        Moi même !
+      </ng-template>
+    </option>
+  </select>
+  <button
+    (click)="changeMood()"
+    class="btn btn-outline-primary ml-3">Changer d'humeur
+  </button>
+</div>

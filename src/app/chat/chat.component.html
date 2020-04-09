@@ -1,19 +1,19 @@
-<nav class="navbar navbar-light bg-wihte">
-  <a class="navbar-brand" class="title">Tame the fox ! </a>
-  <form class="form-inline">
-      Vous êtes :
-      <img src="assets/img/{{connectedUser.mood}}.png" class="mr-3">
-      {{connectedUser.email}}<br />
-      <button class="btn btn-outline-primary">Changer d'humeur</button>
-
-  </form>
-  <div>
-    <button class="btn btn-outline-primary mr-2">Voir mon profil</button>
+<div class="row bg-white p-2">
+  <div class="col-3">
+    <a class="title ml-3" style="font-size:30px;">Tame the fox ! </a>
+  </div>
+  <div class="col-6">
+    <form class="form-inline">
+      <app-moodselector></app-moodselector>
+    </form>
+  </div>
+  <div class="col-3 text-right">
+    <button class="btn btn-outline-primary mr-2" (click)="toggleViewMyProfile()">Voir mon profil</button>
     <button class="btn btn-outline-primary"  (click)="logout()">
       Me déconnecter
     </button>
   </div>
-</nav>
+</div>
 <div class="container-fluid">
   <div class="row my-3">
     <div class="col-3">
@@ -24,13 +24,16 @@
       </div>
       <div class="row my-2 chatRoomMood">
         <div class="col-4">
-          <img src="assets/img/sunny.png" class="mr-2">(20%)
+          <img src="assets/img/sunny.png" class="mr-2">
+          <span *ngIf="!sunnyUsers || sunnyUsers?.length > 0">{{sunnyUsers?.length}}</span>
         </div>
         <div class="col-4">
-          <img src="assets/img/clouds.png" class="mr-2">(60%)
+          <img src="assets/img/clouds.png" class="mr-2">
+          <span *ngIf="!cloudsUsers || cloudsUsers?.length > 0">{{cloudsUsers?.length}}</span>
         </div>
         <div class="col-4">
-          <img src="assets/img/questions.png" class="mr-2">(20%)
+          <img src="assets/img/questions.png" class="mr-2">
+          <span *ngIf="!questionsUsers || questionsUsers?.length > 0">{{questionsUsers?.length}}</span>
         </div>
       </div>
       <ul class="list-group userlist">
@@ -39,11 +42,12 @@
             *ngIf="user.email != connectedUser.email"
             (click)="createComponent(connectedUser, user, i)"
             class="list-group-item">
-            <img src="assets/img/{{user.mood}}.png" class="mr-3">{{user.email}}</li>
+            <img src="assets/img/{{user.mood}}.png" class="mr-3">{{user.email}} {{user.id}}</li>
         </ng-container>
       </ul>
     </div>
     <div class="col-9">
+      <app-viewmyprofile [active]="showmyprofile"></app-viewmyprofile>
       <ng-template #chatpanelsContainer></ng-template>
     </div>
   </div>

@@ -12,6 +12,7 @@ import { User } from './../user';
 import { UserService } from './../user.service';
 import { Router } from '@angular/router';
 import { ChatpanelComponent } from './../chatpanel/chatpanel.component';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chat',
@@ -26,9 +27,12 @@ export class ChatComponent implements OnInit {
   //so index is a unique property here to identify each component individually.
   index: number = 0;
   componentsReferences = [];
-
+  showmyprofile = false;
 
   userList;
+  sunnyUsers;
+  cloudsUsers;
+  questionsUsers;
   connectedUser;
 
   constructor(
@@ -45,12 +49,26 @@ export class ChatComponent implements OnInit {
     this.usrSrv.getUsers().subscribe(data => {
       this.userList = data.map(e => {
         return {
+          id: e.id,
           timestamp: e.timestamp.toDate(),
           mood: e.mood,
           email: e.email
         } as User;
       })
     });
+
+    //get sunny users
+    this.usrSrv.getUsers()
+    .pipe(map(users => users.filter(user => user.mood == 'sunny' ))).subscribe(value => this.sunnyUsers = value);
+
+    //get clouds users
+    this.usrSrv.getUsers()
+    .pipe(map(users => users.filter(user => user.mood == 'clouds' ))).subscribe(value => this.cloudsUsers = value);
+
+    //get questions users
+    this.usrSrv.getUsers()
+    .pipe(map(users => users.filter(user => user.mood == 'questions' ))).subscribe(value => this.questionsUsers = value);
+
   }
 
   hideAllComponents() {
@@ -72,7 +90,6 @@ export class ChatComponent implements OnInit {
       componentRef.instance.to = to;
       componentRef.instance.close.subscribe(() => {
         componentRef.instance.close.unsubscribe();
-        alert("composant destroy");
         this.componentsReferences = this.componentsReferences.filter(x => x.instance.index !== componentRef.instance.index);
         componentRef.destroy();
       });
@@ -98,8 +115,13 @@ export class ChatComponent implements OnInit {
     //this.currentUser = user;
   }
 
+  toggleViewMyProfile() {
+    this.showmyprofile = !this.showmyprofile;
+  }
+
   logout() {
     this.router.navigate(['/']);
   }
+
 
 }

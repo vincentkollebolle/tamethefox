@@ -13,6 +13,8 @@ import { TameboxComponent } from './tamebox/tamebox.component';
 import { LoginComponent } from './login/login.component';
 import { ChatComponent } from './chat/chat.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
+import { MoodselectorComponent } from './moodselector/moodselector.component';
+import { ViewmyprofileComponent } from './viewmyprofile/viewmyprofile.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
     TameboxComponent,
     LoginComponent,
     ChatComponent,
-    DateAgoPipe
+    DateAgoPipe,
+    MoodselectorComponent,
+    ViewmyprofileComponent
   ],
   imports: [
     BrowserModule,
