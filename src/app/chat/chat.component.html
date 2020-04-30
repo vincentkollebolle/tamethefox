@@ -1,0 +1,41 @@
+<div class="row bg-white p-2">
+    <div class="col-3">
+      <a class="title ml-3" style="font-size:30px;">Tame the fox ! </a>
+    </div>
+    <div class="col-6">
+        <div *ngIf="fireauthSrv.user$ | async as user">
+            <p>UserJSON: {{user | json}}</p>
+        </div>
+    </div>
+    <div class="col-3 text-right">
+      <button class="btn btn-outline-primary mr-2" disabled="disabled">Voir mon profil</button>
+      <button class="btn btn-outline-primary" (click)="fireauthSrv.signOut()">Me déconnecter </button>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row my-3">
+      <div class="col-3">
+        <div class="row">
+          <div class="col-12">
+            <h5 class="title">Utilisateurs Connecté.e.s <small></small></h5>
+          </div>
+        </div>
+        <div class="row my-2 chatRoomMood">
+          <div class="col-4">
+            <img src="assets/img/sunny.png" class="mr-2">
+          </div>
+          <div class="col-4">
+            <img src="assets/img/clouds.png" class="mr-2">
+          </div>
+          <div class="col-4">
+            <img src="assets/img/questions.png" class="mr-2">
+          </div>
+        </div>
+        <ul class="list-group userlist">
+        </ul>
+      </div>
+      <div class="col-9">
+      </div>
+    </div>
+  </div>
+  

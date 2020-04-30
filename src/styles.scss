@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+body {
+  font-family: 'Roboto', sans-serif;
+  background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(239,239,255,1) 0%, rgba(239,239,239,1) 100%);
+}
+.title { font-family: 'Pacifico', cursive; }
+
+a:hover{
+    cursor: pointer;
+}
