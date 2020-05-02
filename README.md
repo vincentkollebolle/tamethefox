@@ -9,6 +9,7 @@ Basé sur [Angular](https://angular.io/).
 ## Rermeciement.
 
 * Vive le pesto.
+* Vincent Callierez
 * Adlibitum.
 
 # Tame The Fox
