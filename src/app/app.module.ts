@@ -18,13 +18,17 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { ChatComponent } from './chat/chat.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AlertComponent } from './alert/alert.component';
+import { LogoComponent } from './logo/logo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
     ChatComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    AlertComponent,
+    LogoComponent
   ],
   imports: [
     BrowserModule,
