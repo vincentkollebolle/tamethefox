@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FireauthService } from './../service/fireauth.service';
+import { AlertService } from './../service/alert.service';
 
 @Component({
   selector: 'app-chat',
@@ -8,7 +9,9 @@ import { FireauthService } from './../service/fireauth.service';
 })
 export class ChatComponent implements OnInit {
 
-  constructor(public fireauthSrv: FireauthService) { }
+  constructor(
+    public fireauthSrv: FireauthService,
+    public alertSrv: AlertService) { }
 
   ngOnInit() {
   }

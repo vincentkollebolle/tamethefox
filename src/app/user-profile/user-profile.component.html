@@ -6,15 +6,11 @@
 <ng-template #guest>
     <div class="containerLogin">
         <div class="contentLogin">
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <img src="assets/img/foxlogo.jpg" class="logo" alt="tame the fox">
-            </div>
-          </div>
           <!--title-->
           <div class="row my-2">
             <div class="col-md-12 text-center">
-              <h1 class="title">
+              <app-logo></app-logo>
+              <h1 class="title mt-3">
                 Tame the Fox !
               </h1>
             </div>
@@ -23,14 +19,9 @@
             <div class="col-12 ">
               <h4 class="title mb-2">Connexion</h4>
             </div>
-            <div class="col-12">
-              <div class="alert alert-warning" role="alert">
-                {{message}}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-            </div>
+          </div>
+          <app-alert></app-alert>
+          <div class="row">
             <div class="col-12">
               <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
@@ -62,46 +53,7 @@
 
 <!-- User logged in -->
 <ng-template #authenticated>
-<div *ngIf="fireauthSrv.user$ | async as user">
-    <div class="containerLogin">
-        <div class="contentLogin">
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <img src="assets/img/foxlogo.jpg" class="logo" alt="tame the fox">
-            </div>
-          </div>
-          <!--title-->
-          <div class="row my-2">
-            <div class="col-md-12 text-center">
-              <h1 class="title">
-                Tame the Fox !
-              </h1>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="alert alert-warning" role="alert">
-                Bienvenu.e ! 
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-            </div>
-            <div class="col-12">
-                <p>UserJSON: {{user | json}}</p>
-                <ul>
-                    <li><label>UID:</label> {{ user.uid }}</li>
-                    <li><label>Email:</label> {{ user.email }}</li>
-                    <li><label>Mood:</label>  {{ user.mood }}</li>
-                </ul>
-                <button 
-                    class="btn btn-outline-primary" 
-                    (click)="fireauthSrv.signOut()">Déconnexion</button>
-            </div>
-          </div>
-        </div>
-      </div>
-</div>
+connecté.e
 </ng-template>
 
 

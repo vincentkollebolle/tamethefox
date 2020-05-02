@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FireauthService } from './../service/fireauth.service';
+import { AlertService } from './../service/alert.service';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -14,7 +16,8 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public fireauthSrv: FireauthService) { }
+    public fireauthSrv: FireauthService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.initForm();
@@ -30,7 +33,7 @@ export class UserProfileComponent implements OnInit {
   onSubmit() {
     const email = this.signinForm.get('email').value;
     const password = this.signinForm.get('password').value;
-    this.message = "Connexion en cours ...";
+    this.alertService.info('Connexion en cours ...', { autoClose: false,keepAfterRouteChange: false});
     this.fireauthSrv.signIn(email,password);
   }
 

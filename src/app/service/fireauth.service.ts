@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { User } from './../model/user';
+import { AlertService } from './alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,13 @@ import { User } from './../model/user';
 export class FireauthService  implements OnInit  {
 
   user$: Observable<User>; //When logged-out, will have an Observable of null
-;
+
 
   constructor(
     private fireauth: AngularFireAuth,
     private firestore: AngularFirestore,
-    private router: Router) { 
+    private router: Router,
+    private alertSrv: AlertService) { 
       
       // Get the auth state, then fetch the Firestore user document or return null
       this.user$ = this.fireauth.authState.pipe(
@@ -43,7 +45,9 @@ export class FireauthService  implements OnInit  {
     //const credential = await this.fireauth.auth.signInWithPopup(provider);
     const credential = await this.fireauth.auth.signInWithEmailAndPassword(email, password)
       .then(credential => {return this.updateUserData(credential.user);})
-      .catch(error => { console.log(error)});
+      .catch(error => { 
+        this.alertSrv.error(error.message, { autoClose: false,keepAfterRouteChange: true});
+      });
     
   }
 
@@ -56,6 +60,7 @@ export class FireauthService  implements OnInit  {
       email: user.email, 
     } 
     userRef.set(data, { merge: true });
+    this.alertSrv.success('Bienvenu.e dans TameTheFox ! ', { autoClose: true ,keepAfterRouteChange: false});
     this.router.navigate(['/chat']);
     return userRef;
 
@@ -63,6 +68,9 @@ export class FireauthService  implements OnInit  {
 
   async signOut() {
     await this.fireauth.auth.signOut();
+    //emit message bye bye
+    //TODO: doesn't work at all 
+    this.alertSrv.success('Bye Bye Blondie ! Vous avez été déconnecté.e ...', { autoClose: false,keepAfterRouteChange: true});
     this.router.navigate(['/']);
   }
 
