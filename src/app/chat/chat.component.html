@@ -1,33 +1,32 @@
-<div class="row bg-white p-2">
+<div *ngIf="fireauthSrv.user$ | async as connectedUser">
+  <div class="row bg-white p-2">
     <div class="col-3">
       <a class="title ml-3" style="font-size:30px;">Tame the fox ! </a>
     </div>
-    <div class="col-6">
-        <div *ngIf="fireauthSrv.user$ | async as user">
-          <label class="title">Votre hummeur:</label>
-          <div class="col-6">
-            <div class="btn-group btn-group-sm" role="group">
-                <button
+    <div class="col-6">     
+      <label class="title">Votre hummeur:</label>
+      <div class="col-6">
+        <div class="btn-group btn-group-sm" role="group">
+          <button
                 class="btn btn-outline-light"
-                [class.active]="user.mood === 'sunny'"
-                (click)="userSrv.changeMood(user.uid,'sunny')">
+                [class.active]="connectedUser.mood === 'sunny'"
+                (click)="userSrv.changeMood(connectedUser.uid,'sunny')">
                     <img src="assets/img/sunny.png">
-                </button>
-                <button
+          </button>
+          <button
                 class="btn btn-outline-light"
-                [class.active]="user.mood === 'clouds'"
-                (click)="userSrv.changeMood(user.uid,'clouds')">
+                [class.active]="connectedUser.mood === 'clouds'"
+                (click)="userSrv.changeMood(connectedUser.uid,'clouds')">
                     <img src="assets/img/clouds.png">
-                </button>
-                <button
+          </button>
+          <button
                 class="btn btn-outline-light"
-                [class.active]="user.mood === 'questions'"
-                (click)="userSrv.changeMood(user.uid,'questions')">
+                [class.active]="connectedUser.mood === 'questions'"
+                (click)="userSrv.changeMood(connectedUser.uid,'questions')">
                     <img src="assets/img/questions.png">
-                </button>
-            </div>
-          </div>
+          </button>
         </div>
+      </div>
     </div>
     <div class="col-3 text-right">
       <button class="btn btn-outline-primary mr-2" disabled="disabled">Voir mon profil</button>
@@ -35,7 +34,7 @@
     </div>
   </div>
   <div class="container-fluid">
-    <app-alert></app-alert>
+    <app-alert></app-alert> 
     <div class="row my-3">
       <div class="col-3">
         <div class="row">
@@ -46,15 +45,24 @@
         <div class="row my-2 chatRoomMood">
           <div class="col-4">
             <img src="assets/img/sunny.png" class="mr-2">
+            <span *ngIf="!sunnyUsers || sunnyUsers?.length > 0">{{sunnyUsers$?.length}}</span>
           </div>
           <div class="col-4">
             <img src="assets/img/clouds.png" class="mr-2">
+            <span *ngIf="!cloudsUsers || cloudsUsers?.length > 0">{{cloudsUsers$?.length}}</span>
           </div>
           <div class="col-4">
             <img src="assets/img/questions.png" class="mr-2">
+            <span *ngIf="!questionsUsers || questionsUsers?.length > 0">{{questionsUsers$?.length}}</span>
           </div>
         </div>
         <ul class="list-group userlist">
+          <ng-container *ngFor="let user of userList$ | async; let i = index" >
+            <li
+              *ngIf="user.email != connectedUser.email"
+              class="list-group-item">
+              <img src="assets/img/{{user.mood}}.png" class="mr-3">{{user.email}} {{user.uid}}</li>
+          </ng-container>
         </ul>
       </div>
       <div class="col-9">

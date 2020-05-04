@@ -14,9 +14,6 @@ import { AlertService } from './alert.service';
 })
 export class UserService {  
   
-  connectedUser; 
- 
-  
   constructor(
     private firestore: AngularFirestore,
     private alertSrv: AlertService) { }  

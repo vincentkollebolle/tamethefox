@@ -58,6 +58,7 @@ export class FireauthService  implements OnInit  {
     const data = { 
       uid: user.uid, 
       email: user.email, 
+      mood: user.mood,
     } 
     userRef.set(data, { merge: true });
     this.alertSrv.success('Bienvenu.e dans TameTheFox ! ', { autoClose: true ,keepAfterRouteChange: false});
