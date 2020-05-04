@@ -4,7 +4,29 @@
     </div>
     <div class="col-6">
         <div *ngIf="fireauthSrv.user$ | async as user">
-            <p>UserJSON: {{user | json}}</p>
+          <label class="title">Votre hummeur:</label>
+          <div class="col-6">
+            <div class="btn-group btn-group-sm" role="group">
+                <button
+                class="btn btn-outline-light"
+                [class.active]="user.mood === 'sunny'"
+                (click)="userSrv.changeMood(user.uid,'sunny')">
+                    <img src="assets/img/sunny.png">
+                </button>
+                <button
+                class="btn btn-outline-light"
+                [class.active]="user.mood === 'clouds'"
+                (click)="userSrv.changeMood(user.uid,'clouds')">
+                    <img src="assets/img/clouds.png">
+                </button>
+                <button
+                class="btn btn-outline-light"
+                [class.active]="user.mood === 'questions'"
+                (click)="userSrv.changeMood(user.uid,'questions')">
+                    <img src="assets/img/questions.png">
+                </button>
+            </div>
+          </div>
         </div>
     </div>
     <div class="col-3 text-right">

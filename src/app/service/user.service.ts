@@ -7,6 +7,7 @@ import { Observable} from "rxjs";
 import { map, filter, mergeMap, count, take } from "rxjs/operators";
 //model
 import { User } from './../model/user';
+import { AlertService } from './alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,36 +17,20 @@ export class UserService {
   connectedUser; 
  
   
-  constructor(private firestore: AngularFirestore) { }  
+  constructor(
+    private firestore: AngularFirestore,
+    private alertSrv: AlertService) { }  
   
-  setConnectedUser(email) {
-    console.log("before");
-    
-    const collection = this.firestore.collection<User>('users', ref => ref.where('email', '==', email))
-    const user$ = collection
-      .valueChanges()
-      .pipe(
-        map(users => {
-          const currentUser = users[0];
-          return currentUser;
-        })
-      ).subscribe(user => { 
-        this.connectedUser = user; 
-      });
-    
-    
-  }
-
-  getConnectedUser() {
-    return this.connectedUser;
-  }
-  
-  logConnectedUser() {
-    console.log(this.connectedUser);
-  }
+ 
   
   getUsers(): Observable<User[]> {
     return this.firestore.collection<User>('users')
       .valueChanges({ idField: 'id' })
+  }
+
+  changeMood(_uid, _mood: string) {
+    this.firestore.doc(`users/${_uid}`).update({mood: _mood});
+    this.alertSrv.warn('Vous avez changez votre humeur pour '+_mood, { autoClose: true ,keepAfterRouteChange: false});
+    console.log(_uid);
   }
 }

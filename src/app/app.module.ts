@@ -28,7 +28,7 @@ import { LogoComponent } from './logo/logo.component';
     ChatComponent,
     UserProfileComponent,
     AlertComponent,
-    LogoComponent
+    LogoComponent,
   ],
   imports: [
     BrowserModule,
