@@ -20,6 +20,8 @@ import { ChatComponent } from './chat/chat.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AlertComponent } from './alert/alert.component';
 import { LogoComponent } from './logo/logo.component';
+import { ChatpanelComponent } from './chatpanel/chatpanel.component';
+import { DateAgoPipe } from './pipe/date-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { LogoComponent } from './logo/logo.component';
     UserProfileComponent,
     AlertComponent,
     LogoComponent,
+    ChatpanelComponent,
+    DateAgoPipe,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +44,7 @@ import { LogoComponent } from './logo/logo.component';
     AngularFirestoreModule,
   ],
   providers: [],
+  entryComponents: [ChatpanelComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
