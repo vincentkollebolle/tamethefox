@@ -17,7 +17,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 // env
 import { environment } from '../environments/environment';
 import { ChatComponent } from './chat/chat.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AlertComponent } from './alert/alert.component';
 import { LogoComponent } from './logo/logo.component';
 import { ChatpanelComponent } from './chatpanel/chatpanel.component';
@@ -28,7 +27,6 @@ import { DateAgoPipe } from './pipe/date-ago.pipe';
     AppComponent,
     SigninComponent,
     ChatComponent,
-    UserProfileComponent,
     AlertComponent,
     LogoComponent,
     ChatpanelComponent,

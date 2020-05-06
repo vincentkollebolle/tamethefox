@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FireauthService } from './../service/fireauth.service';
+import { AlertService } from './../service/alert.service';
+
 
 @Component({
-  selector: 'app-signin',
+  selector: 'app-user-profile',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
@@ -14,7 +16,8 @@ export class SigninComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private fireauthSrv: FireauthService) { }
+    public fireauthSrv: FireauthService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.initForm();
@@ -23,20 +26,15 @@ export class SigninComponent implements OnInit {
   initForm() {
     this.signinForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
+      password: ['', [Validators.required ]]
     });
   }
 
   onSubmit() {
-    this.message = "Connexion en cours ...";
     const email = this.signinForm.get('email').value;
     const password = this.signinForm.get('password').value;
-    //TODO: faire en sorte que signInUser renvoi une promesse et utiliser .catch() {} pour 
-    //mettre à jour le message. 
-    
-    
+    this.alertService.info('Connexion en cours ...', { autoClose: false,keepAfterRouteChange: false});
+    this.fireauthSrv.signIn(email,password);
   }
 
-
-
-}  
+}
