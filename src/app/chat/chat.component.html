@@ -1,9 +1,10 @@
   <div class="row bg-white p-2">
     <div class="col-3">
+      <img src="assets/img/foxlogo.jpg" style="width:60px">
       <a class="title ml-3" style="font-size:30px;">Tame the fox ! </a>
     </div>
     <div class="col-2 text-right">     
-      <label class="title">Votre hummeur:</label>
+      <label class="title">Votre humeur:</label>
     </div>
     <div class="col-4">
       <div *ngIf="fireauthSrv.user$ | async as connectedUser">
@@ -42,21 +43,21 @@
       <div class="col-3">
         <div class="row">
           <div class="col-12">
-            <h5 class="title">Utilisateurs Connecté.e.s <small></small></h5>
+            <h5 class="title">Personnes connectées <small></small></h5>
           </div>
         </div>
         <div class="row my-2 chatRoomMood">
           <div class="col-4">
             <img src="assets/img/sunny.png" class="mr-2">
-            <span *ngIf="!sunnyUsers || sunnyUsers?.length > 0">{{sunnyUsers$?.length}}</span>
+            <span *ngIf="!sunnyUsers$ || sunnyUsers$?.length > 0">{{sunnyUsers$?.length}}</span>
           </div>
           <div class="col-4">
             <img src="assets/img/clouds.png" class="mr-2">
-            <span *ngIf="!cloudsUsers || cloudsUsers?.length > 0">{{cloudsUsers$?.length}}</span>
+            <span *ngIf="!cloudsUsers$ || cloudsUsers$?.length > 0">{{cloudsUsers$?.length}}</span>
           </div>
           <div class="col-4">
             <img src="assets/img/questions.png" class="mr-2">
-            <span *ngIf="!questionsUsers || questionsUsers?.length > 0">{{questionsUsers$?.length}}</span>
+            <span *ngIf="!questionsUsers$ || questionsUsers$?.length > 0">{{questionsUsers$?.length}}</span>
           </div>
         </div>
         <div *ngIf="fireauthSrv.user$ | async as connectedUser">
@@ -66,7 +67,7 @@
                 *ngIf="user.email != connectedUser.email" 
                 (click)="createComponent(connectedUser, user, i)"
                 class="list-group-item">
-                <img src="assets/img/{{user.mood}}.png" class="mr-3">{{user.email}} {{user.uid}}</li>
+                <img src="assets/img/{{user.mood}}.png" class="mr-3" style="width:20px;">{{user.uid}}</li>
             </ng-container>
           </ul>
         </div>

@@ -1,1 +1,7 @@
 .active { background: #efefef !important; }
+img { width:30px; }
+
+.userlist li:hover { 
+    background: #efefef;
+    cursor: pointer;
+}

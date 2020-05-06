@@ -1,20 +1,17 @@
 <!-- content chat -->
-<div [hidden]="hideChatpanel" >
+<div [hidden]="hideChatpanel">
     <div class="row" style="background:white;border-bottom:1px solid #efefef;">
         <div class="col-3 pt-2">
             <h4 class="title">Vous chattez avec </h4>
         </div>
         <div class="col-6 pt-2">
-            <h4 class="title">
-                <img class="" src="assets/img/{{to.mood}}.png" style="width:14%" alt="happy" />
+            <img class="" src="assets/img/{{to.mood}}.png" alt="happy" />
+            <label class="title">
                 {{to.uid}}
-            </h4>
+            </label>
         </div>
         <div class="col-3 text-right pt-2">
-            <button type="button" 
-                (click)="selectBox('tamebox')" 
-                [className]="selectedBox == 'profilebox' ? 'btn btn-primary' : 'btn btn-outline-primary'" 
-                disabled="disabled">
+            <button type="button" disabled="disabled">
                 Apprivoiser
             </button>
             <button class="ml-2 btn btn-primary" (click)="destroy()">Fermer</button>
@@ -23,56 +20,52 @@
     <div class="row" style="background:white">
         <!-- chat col-->
         <div class="col-6">
-            <div class="chatmessages bg-white my-3"  #scrollMe [scrollTop]="scrollMe.scrollHeight">
+            <div class="chatmessages bg-white my-3" #scrollMe [scrollTop]="scrollMe.scrollHeight">
                 <!--div class="text-center" *ngIf="user.messages.length == 0">
                     Personne n'a encore rien dit.<br />
                     Démarrez la conversation ;)
                 </div-->
                 <ng-container *ngFor="let message of chatMessages">
-                    <div
-                      [className]="message.from == connectedUser.email ? 'card chat m-2 fromto' : 'card chat m-2 tofrom'"
-                      *ngIf="(message.from == from.email && message.to == to.email) || (message.from == to.email && message.to == from.email) ">
-                      <div class="card-header text-muted">
-                         <img class="img-fluid" src="assets/img/{{message.mood}}.png">
-                         {{message.from}}
-                      </div>
-                      <div class="card-body">
-                        {{message.content}}
-                      </div>
-                      <div class="card-footer text-muted">
-                        {{ message.createdAt | dateAgo}}
-                      </div>
+                    <div [className]="message.from == from.uid ? 'card chat m-2 fromto' : 'card chat m-2 tofrom'"
+                        *ngIf="(message.from == from.uid && message.to == to.uid) || (message.from == to.uid && message.to == from.uid) ">
+                        <div class="card-header text-muted">
+                            <div *ngIf="message.from != from.uid; else vousBlock">
+                                {{message.from}}
+                            </div>
+                            <ng-template #vousBlock>
+                                Vous:
+                            </ng-template>
+                        </div>
+                        <div class="card-body">
+                            {{message.content}}
+                        </div>
+                        <div class="card-footer text-muted">
+                            {{ message.createdAt | dateAgo}}
+                        </div>
                     </div>
-                  </ng-container>
-        
+                </ng-container>
+
             </div>
             <!-- chat send -->
             <div class="row my-3">
                 <div class="col-12">
-                <div class="formSend">
-                    <form (ngSubmit)="sendMessage()">
-                    <div class="input-group">
-                        <input
-                        name="msg2send"
-                        class="form-control"
-                        [(ngModel)]="msg2send"
-                        type="text"
-                        placeholder="Dites quelque chose...">
-                                        <div class="input-group-append">
-                                        <button
-                            class="btn btn-outline-primary"
-                            type="submit"
-                            >C'est dit !</button>
-                                        </div>
-                                    </div>
-                    </form>
-                </div>
+                    <div class="formSend">
+                        <form (ngSubmit)="sendMessage()">
+                            <div class="input-group">
+                                <input name="msg2send" class="form-control" [(ngModel)]="msg2send" type="text"
+                                    placeholder="Dites quelque chose...">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="submit">C'est dit !</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
         <!--profile-->
         <div class="col-6 my-3" style="border-left:1px solid #efefef;">
-            <div class=" bg-white profile">
+            <div class=" bg-white ">
                 <div class="col-12 p-0">
                     <h4 class="title">Profil</h4>
                     <div *ngIf="!profileEntries || profileEntries?.length===0">
@@ -82,33 +75,31 @@
                             Soyez le ou la première à écrire dedans !
                         </div>
                     </div>
-                    <div
-                        class="profilemsg p-3 my-2"
-                        #scrollMe [scrollTop]="scrollMe.scrollHeight"
+                </div>
+                <div class="col-12 profile" #scrollMeProfile [scrollTop]="scrollMeProfile.scrollHeight">
+                    <div 
+                        class="profilemsg p-3 my-2" 
                         *ngFor="let entry of profileEntries">
                         <span class="font-weight-bold">
-                        <strong class="text-muted">{{ entry.createdAt | dateAgo}}</strong> -
-                        <strong>{{entry.from}}</strong>
+                            <strong class="text-muted">{{ entry.createdAt | dateAgo}}</strong> -
+                            <strong>{{entry.from}}</strong>
                         </span><br />
-                        {{entry.content}}<br/>    
+                        {{entry.content}}<br />
                     </div>
                 </div>
             </div>
             <div class="col-12 my-2">
                 <h4 class="title">Ajouter des informations</h4>
-                <form  (ngSubmit)="addEntryToProfile()">
-                <div class="form-group mb-1">
-                    <textarea
-                    class="form-control"
-                    rows="2"
-                    placeholder="Comment elle/il se sent ? Que fait elle/il en ce moment ? "
-                    name="profilEntry2send"
-                    [(ngModel)]="profilEntry2send">
-                    </textarea>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-block btn-outline-primary">Ajouter</button>
-                </div>
+                <form (ngSubmit)="addEntryToProfile()">
+                    <div class="form-group mb-1">
+                        <textarea class="form-control" rows="2"
+                            placeholder="Comment elle/il se sent ? Que fait elle/il en ce moment ? " name="profilEntry2send"
+                            [(ngModel)]="profilEntry2send">
+                        </textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-block btn-outline-primary">Ajouter</button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -26,8 +26,15 @@ export class UserService {
   }
 
   changeMood(_uid, _mood: string) {
+    console.log(_mood);
     this.firestore.doc(`users/${_uid}`).update({mood: _mood});
-    this.alertSrv.warn('Vous avez changez votre humeur pour '+_mood, { autoClose: true ,keepAfterRouteChange: false});
-    console.log(_uid);
+    if(_mood=="sunny") {
+      this.alertSrv.warn('Vous voilà plein de soleil !', { autoClose: true ,keepAfterRouteChange: false});
+    } else if(_mood=="clouds") {
+      this.alertSrv.warn('Vous voilà nuageux !', { autoClose: true ,keepAfterRouteChange: false});
+    } else if(_mood=="questions") {
+      this.alertSrv.warn('Vous voilà plein de questions!', { autoClose: true ,keepAfterRouteChange: false});
+    }
+    
   }
 }
