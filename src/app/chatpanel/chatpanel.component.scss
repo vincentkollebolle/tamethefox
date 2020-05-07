@@ -1,3 +1,4 @@
+/* https://yeun.github.io/open-color/#yellow */
 .btn-group.special {
     display: flex;
   }
@@ -6,12 +7,12 @@
     flex: 1
   }
   .chatmessages {
-    height: 590px;
+    height: 483px;
     overflow: scroll;
   }
   .profile {
     overflow: scroll;
-    height:390px;
+    max-height:355px;
   }
   .chat.card {
     border-bottom: 0;
@@ -43,11 +44,18 @@
   
   .fromto {
     float: right !important;
-    background: #efefef;
+    background: #ffc078;
   }
   .fromto .card-header {
-    background:#efefef;
+    background:#ffc078;
   }
-  .tofrom {}
-  .profilemsg { border: 1px solid #efefef; }
+  .tofrom {
+    background:#fff4e6;
+  }
+  .tofrom .card-header {
+    background:#fff4e6;
+  }
+  .profilemsg { 
+    background:#fff4e6;
+    border: 1px solid #efefef; }
   img { width:30px;}

@@ -1,7 +1,12 @@
-.active { background: #efefef !important; }
+.active { background: #ffc078 !important; }
 img { width:30px; }
 
 .userlist li:hover { 
-    background: #efefef;
+    background: #ffc078;
     cursor: pointer;
+}
+.alert-warning {
+    color: #856404;
+    background-color: #fff4e6;
+    border-color: #fff4e6;
 }

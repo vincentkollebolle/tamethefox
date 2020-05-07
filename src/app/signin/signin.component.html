@@ -26,11 +26,11 @@
     <!--bouton submit-->
     <button 
       type="submit"
-      class="btn btn-lg btn-primary btn-block"
+      class="btn btn-lg btn-outline-primary btn-block"
       [disabled]="signinForm.invalid">Connexion</button>
 
     <!--create account-->
     <p class="mt-5 mb-3 text-muted text-center">
-      <a disabled="disabled">Créer un compte</a>
+      <a [routerLink]="['/signup']">Créer un compte</a>
     </p>
 </form>

@@ -1,20 +1,18 @@
 <!-- content chat -->
 <div [hidden]="hideChatpanel">
-    <div class="row" style="background:white;border-bottom:1px solid #efefef;">
-        <div class="col-3 pt-2">
-            <h4 class="title">Vous chattez avec </h4>
-        </div>
-        <div class="col-6 pt-2">
-            <img class="" src="assets/img/{{to.mood}}.png" alt="happy" />
+    <div class="row">
+        <div class="col-9">
+            <h5 class="title d-inline-block">Vous chattez avec :  </h5>
+            <img class="mx-2" src="assets/img/{{to.mood}}.png" alt="happy" />
             <label class="title">
                 {{to.uid}}
             </label>
         </div>
-        <div class="col-3 text-right pt-2">
-            <button type="button" disabled="disabled">
+        <div class="col-3 text-right">
+            <button  class="ml-2 mb-2 btn btn-outline-primary" type="button" disabled="disabled">
                 Apprivoiser
             </button>
-            <button class="ml-2 btn btn-primary" (click)="destroy()">Fermer</button>
+            <button class="ml-2 mb-2 btn btn-outline-primary" (click)="destroy()">Fermer</button>
         </div>
     </div>
     <div class="row" style="background:white">
@@ -28,7 +26,7 @@
                 <ng-container *ngFor="let message of chatMessages">
                     <div [className]="message.from == from.uid ? 'card chat m-2 fromto' : 'card chat m-2 tofrom'"
                         *ngIf="(message.from == from.uid && message.to == to.uid) || (message.from == to.uid && message.to == from.uid) ">
-                        <div class="card-header text-muted">
+                        <div class="card-header text-dark">
                             <div *ngIf="message.from != from.uid; else vousBlock">
                                 {{message.from}}
                             </div>
@@ -64,10 +62,12 @@
             </div>
         </div>
         <!--profile-->
-        <div class="col-6 my-3" style="border-left:1px solid #efefef;">
+        <div class="col-6 " style="border-left:1px solid #efefef;">
             <div class=" bg-white ">
-                <div class="col-12 p-0">
-                    <h4 class="title">Profil</h4>
+                <div class="col-12 ">
+                    <h4 class="title my-3">Profil</h4>
+                </div>
+                <div class="col-12 profile" #scrollMeProfile [scrollTop]="scrollMeProfile.scrollHeight">
                     <div *ngIf="!profileEntries || profileEntries?.length===0">
                         <div class="text-center">
                             <img src="assets/img/foxlogogrey.jpg" style="width:60%"><br />
@@ -75,8 +75,6 @@
                             Soyez le ou la première à écrire dedans !
                         </div>
                     </div>
-                </div>
-                <div class="col-12 profile" #scrollMeProfile [scrollTop]="scrollMeProfile.scrollHeight">
                     <div 
                         class="profilemsg p-3 my-2" 
                         *ngFor="let entry of profileEntries">
@@ -88,8 +86,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 my-2">
-                <h4 class="title">Ajouter des informations</h4>
+            <div class="col-12">
+                <h4 class="title mb-3">Ajouter des informations</h4>
                 <form (ngSubmit)="addEntryToProfile()">
                     <div class="form-group mb-1">
                         <textarea class="form-control" rows="2"
