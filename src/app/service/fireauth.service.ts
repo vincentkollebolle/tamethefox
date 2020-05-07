@@ -41,8 +41,6 @@ export class FireauthService  implements OnInit  {
   ngOnInit() {}
 
   async signIn(email,password) {
-    //const provider = new auth.GoogleAuthProvider();
-    //const credential = await this.fireauth.auth.signInWithPopup(provider);
     const credential = await this.fireauth.auth.signInWithEmailAndPassword(email, password)
       .then(credential => {return this.updateUserData(credential.user);})
       .catch(error => { 
@@ -51,9 +49,24 @@ export class FireauthService  implements OnInit  {
     
   }
 
+  // Sign up with email/password
+  async signUp(email, password) {
+      return this.fireauth.auth.createUserWithEmailAndPassword(email, password)
+        .then((result) => {
+          this.alertSrv.success("Votre compte a bien été créé !", { autoClose: false,keepAfterRouteChange: true});
+          console.log(result.user)
+        }).catch((error) => {
+          this.alertSrv.error(error.message, { autoClose: false,keepAfterRouteChange: true});
+        })
+  }
+
+
   private updateUserData(user) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<User> = this.firestore.doc(`users/${user.uid}`);
+    
+    //get rid of : Function DocumentReference.set() called with invalid data
+    if(!user.mood) { user.mood ="sunny"; }
 
     const data = { 
       uid: user.uid, 
