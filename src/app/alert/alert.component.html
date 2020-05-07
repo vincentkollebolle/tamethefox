@@ -1,8 +1,4 @@
-<div class="row" style="height:50px;">
-    <div class="col-md-12" style="position:relative">
-        <div *ngFor="let alert of alerts" class="alert {{cssClass(alert)}}">
-            <a class="close" (click)="removeAlert(alert)">&times;</a>
-            <span [innerHTML]="alert.message"></span>
-        </div>
-    </div>
+<div *ngFor="let alert of alerts" class="alert m-1 text-center {{cssClass(alert)}}">
+    <a class="close" (click)="removeAlert(alert)">&times;</a>
+        <span [innerHTML]="alert.message"></span>
 </div>
