@@ -1,59 +1,36 @@
-<div *ngIf="fireauthSrv.user$ | async; then authenticated else guest">
-  <!-- template will replace this div -->
-</div>
+<app-alert></app-alert>
+<form 
+    class="form-signin"
+    [formGroup]="signinForm" 
+    (ngSubmit)="onSubmit()">
+    <app-logo></app-logo>
+    <h1 class="h3 mb-3 font-weight-normal title">Tame the Fox !</h1>
+    
+    <!-- email-->
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="text"
+      id="email"
+      class="form-control"
+      type="email"
+      formControlName="email"
+      placeholder="Votre email">
+    <!--password-->
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password"
+      id="password"
+      class="form-control"
+      formControlName="password"
+      placeholder="Votre mot de passe"
+      required>
 
-<!-- User NOT logged in -->
-<ng-template #guest>
-  <div class="containerLogin">
-      <div class="contentLogin">
-        <!--title-->
-        <div class="row my-2">
-          <div class="col-md-12 text-center">
-            <app-logo></app-logo>
-            <h1 class="title mt-3">
-              Tame the Fox !
-            </h1>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 ">
-            <h4 class="title mb-2">Connexion</h4>
-          </div>
-        </div>
-        <app-alert></app-alert>
-        <div class="row">
-          <div class="col-12">
-            <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
-              <div class="form-group">
-                <input type="text"
-                       id="email"
-                       class="form-control"
-                       formControlName="email"
-                       placeholder="Votre email">
-              </div>
-              <div class="form-group">
-                <input type="password"
-                       id="password"
-                       class="form-control"
-                       formControlName="password"
-                       placeholder="Votre mot de passe">
-              </div>
-              <button 
-                  type="submit"
-                  class="btn btn-primary"
-                  [disabled]="signinForm.invalid">Connexion</button>
-              <button disabled="disabled" class="btn btn-outline-primary ml-2">Creer un compte</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-</ng-template>
+    <!--bouton submit-->
+    <button 
+      type="submit"
+      class="btn btn-lg btn-primary btn-block"
+      [disabled]="signinForm.invalid">Connexion</button>
 
-
-<!-- User logged in -->
-<ng-template #authenticated>
-connecté.e
-</ng-template>
-
-
+    <!--create account-->
+    <p class="mt-5 mb-3 text-muted text-center">
+      <a disabled="disabled">Créer un compte</a>
+    </p>
+</form>
