@@ -21,6 +21,7 @@ import { AlertComponent } from './alert/alert.component';
 import { LogoComponent } from './logo/logo.component';
 import { ChatpanelComponent } from './chatpanel/chatpanel.component';
 import { DateAgoPipe } from './pipe/date-ago.pipe';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { DateAgoPipe } from './pipe/date-ago.pipe';
     LogoComponent,
     ChatpanelComponent,
     DateAgoPipe,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
