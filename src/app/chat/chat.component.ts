@@ -31,6 +31,8 @@ export class ChatComponent implements OnInit {
   cloudsUsers$;
   questionsUsers$;
 
+  userActivePanel; //contient le user du chatpanel actuellement ouvert, null sinon.
+
   constructor(
     public fireauthSrv: FireauthService,
     public alertSrv: AlertService,
@@ -45,6 +47,9 @@ export class ChatComponent implements OnInit {
   }
 
   createComponent(from, to,i) {
+    //on met à jour le user actif (le chatpanel courant)
+    this.userActivePanel = to;
+
     //si on a pas de référence à ce composant dans componentList.
     if(!this.componentsReferences.filter(x => x.instance.to == to)[0]) {
       //cacher tous les composant existant
@@ -57,6 +62,7 @@ export class ChatComponent implements OnInit {
       componentRef.instance.to = to;
       componentRef.instance.close.subscribe(() => {
         componentRef.instance.close.unsubscribe();
+        this.userActivePanel = null;//reset active chatpanel user
         this.componentsReferences = this.componentsReferences.filter(x => x.instance.index !== componentRef.instance.index);
         componentRef.destroy();
       });

@@ -77,7 +77,7 @@
               <li
                 *ngIf="user.email != connectedUser.email" 
                 (click)="createComponent(connectedUser, user, i)"
-                class="list-group-item">
+                [className]="userActivePanel == user ? 'active list-group-item' : 'list-group-item'">
                 <img src="assets/img/{{user.mood}}.png" class="mr-3" style="width:20px;">{{user.uid | slice:0:20}}</li>
             </ng-container>
           </ul>
