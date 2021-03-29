@@ -13,6 +13,8 @@
           *ngIf="(message.from == from.email && message.to == to.email) || (message.from == to.email && message.to == from.email) ">
           <div class="card-header text-muted">
              <img class="img-fluid" src="assets/img/{{message.mood}}.png">
+             from:{{from.uid}}<br >
+             to: {{to.uid}} <br  />
              {{message.from}}
           </div>
           <div class="card-body">

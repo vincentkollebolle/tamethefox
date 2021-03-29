@@ -9,9 +9,10 @@ import {
 } from '@angular/core';
 
 import { User } from './../user';
+import { AuthService} from './../service/auth.service';
 import { UserService } from './../user.service';
-import { Router } from '@angular/router';
 import { ChatpanelComponent } from './../chatpanel/chatpanel.component';
+import { Observable, from, of } from "rxjs";
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -27,16 +28,16 @@ export class ChatComponent implements OnInit {
   //so index is a unique property here to identify each component individually.
   index: number = 0;
   componentsReferences = [];
-  showmyprofile = false;
+  showmyprofile = true;
 
-  userList;
+  userList: Observable<User[]>;
+  connectedUser: Observable<User>;
   sunnyUsers;
   cloudsUsers;
   questionsUsers;
-  connectedUser;
 
   constructor(
-    private router: Router,
+    private authSrv: AuthService,
     private usrSrv: UserService,
     private resolver: ComponentFactoryResolver) { }
 
@@ -45,8 +46,9 @@ export class ChatComponent implements OnInit {
     //get ConnectedUser
     this.connectedUser = this.usrSrv.getConnectedUser();
 
+    this.userList = this.usrSrv.getUsers();
     //get users of the chat
-    this.usrSrv.getUsers().subscribe(data => {
+    /*this.usrSrv.getUsers().subscribe(data => {
       this.userList = data.map(e => {
         return {
           id: e.id,
@@ -55,7 +57,7 @@ export class ChatComponent implements OnInit {
           email: e.email
         } as User;
       })
-    });
+    });*/
 
     //get sunny users
     this.usrSrv.getUsers()
@@ -120,7 +122,7 @@ export class ChatComponent implements OnInit {
   }
 
   logout() {
-    this.router.navigate(['/']);
+    this.authSrv.signOutUser()
   }
 
 

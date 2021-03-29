@@ -1,16 +1,18 @@
 <!-- content chat -->
-<div class="row" [hidden]="!active" style="background:white;">
+<div class="row" [hidden]="!active">
   <!-- chat col-->
-  <div class="col-6">
+  <div class="col-8">
     <div class="bg-white my-3 text-center">
-        <img src="assets/img/foxlogogrey.jpg" style="width:60%"><br />
+        <img src="assets/img/foxlogogrey.jpg" style="width:200px"><br />
         <h4 class="title">Vous vous appprêtez à voir votre profil...</h4>
         <p>
-          Vous pouvez voir votre profil, mais il sera ensuite effacé.<br/>
-          Vous <strong>perdez toutes les personnes que vous avez apprivoisées</strong>,
-          votre profil est <strong>vidé de tout son contenu</strong>.
-          Vous avez vu votre profil, <strong>vous repartez à zero</strong> !
+          Vous pouvez voir votre profil, mais il sera ensuite effacé.
         </p>
+        <ul>
+          <li>Vous <strong>perdez toutes les personnes que vous avez apprivoisées</strong></li>
+          <li>votre profil est <strong>vidé de tout son contenu</strong></li>
+          <li>Vous avez vu votre profil, <strong>vous repartez à zero</strong></li>
+        </ul>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" value="" id="understood">
           <label class="form-check-label" for="understood">Je comprends les risques</label>
@@ -19,22 +21,5 @@
         <button class="btn btn-outline-primary btn-sm mt-2">Annuler </button>
     </div>
   </div>
-  <!--profile-->
-  <div class="col-6 my-3" style="border-left:1px solid #efefef;">
-    <div class="row">
-      <div class="col-12">
-        <h4 class="title">Votre profil </h4>
-        <h5 class="title">Votre identifiant</h5>
-        <p class="text-muted">Voici comment les autres vous voyait:</p>
-        Vous êtes : <strong>iR9DLH6IxbvhLKQwfnqD</strong>
-      </div>
-      <div class="col-12 p-2">
-        <h5 class="title">Apprivoisé.e.[s]: 6 fois</h5>
-        <p class="text-muted">Voici les noms que l'on vous a donné:</p>
-        iR9DLH6IxbvhLKQwfnqD vous a nommé: <strong> Mec Cool </strong><br />
-        rjdWrw2tt2MFxJkmPRh5 vous a nommé: <strong> Etrangeté </strong><br />
-        <button class="btn btn-block btn-outline-primary mt-2">Retour au chat</button>
-      </div>
-    </div>
-  </div>
+  
 </div>

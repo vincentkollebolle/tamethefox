@@ -5,6 +5,7 @@
   <div class="col-6">
     <form class="form-inline">
       <app-moodselector></app-moodselector>
+      {{connectedUser|json}}
     </form>
   </div>
   <div class="col-3 text-right">
@@ -37,12 +38,16 @@
         </div>
       </div>
       <ul class="list-group userlist">
-        <ng-container *ngFor="let user of userList; let i = index" >
-          <li
+        <ng-container *ngFor="let user of userList | async; let i = index" >
+          <!--li
             *ngIf="user.email != connectedUser.email"
             (click)="createComponent(connectedUser, user, i)"
             class="list-group-item">
-            <img src="assets/img/{{user.mood}}.png" class="mr-3">{{user.email}} {{user.id}}</li>
+            <img src="assets/img/{{user.mood}}.png" class="mr-3">{{user.email}} {{user.id}}</li-->
+            <li
+              (click)="createComponent(connectedUser, user, i)"
+              class="list-group-item">
+              <img src="assets/img/{{user.mood}}.png" class="mr-3">{{user.email}} {{user.id}}</li>
         </ng-container>
       </ul>
     </div>

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserService } from './user.service';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -10,20 +10,37 @@ import { Router } from '@angular/router';
 export class IsSignedInGuardGuard implements CanActivate {
 
   constructor(
-    private _router: Router,
-    private userSrv: UserService
+    private router: Router,
+    public fireauth: AngularFireAuth
   ) {}
 
-
-  canActivate(
+  canActivate(): Observable<boolean> | Promise<boolean> | boolean {
+     return new Promise(
+       (resolve, reject) => {
+         this.fireauth.auth.onAuthStateChanged(
+           (user) => {
+             if(user) {
+               resolve(true);
+             } else {
+               this.router.navigate(['signin']);
+               resolve(false);
+             }
+           }
+         );
+       }
+     );
+   }
+  /*canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if (this.userSrv.getConnectedUser()) {
+        alert("connectedUser true");
         return true;
       } else {
+        alert("connectedUser false");
          this._router.navigate([""]);
         return false;
       }
-  }
+  }*/
 
 }

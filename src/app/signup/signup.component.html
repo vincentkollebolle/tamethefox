@@ -1,0 +1,43 @@
+<div class="containerLogin">
+  <div class="contentLogin">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <img src="assets/img/foxlogo.jpg" class="logo" alt="tame the fox">
+      </div>
+    </div>
+    <!--title-->
+    <div class="row my-2">
+      <div class="col-md-12 text-center">
+        <h1 class="title">
+          Tame the Fox !
+        </h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 ">
+        <h4 class="title">Créer un compte</h4>
+        <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <input type="text"
+                   id="email"
+                   class="form-control"
+                   formControlName="email"
+                   placeholder="Votre email">
+          </div>
+          <div class="form-group">
+            <input type="password"
+                   id="password"
+                   class="form-control"
+                   formControlName="password"
+                   placeholder="Choisissez un mot de passe">
+          </div>
+          <button class="btn btn-primary"
+                  type="submit"
+                  [disabled]="signupForm.invalid">Créer mon compte</button>
+          <button class="btn btn-outline-primary ml-2" routerLink="/signin">Retour</button>
+        </form>
+        <p class="text-danger">{{ errorMessage }}</p>
+      </div>
+    </div>
+  </div>
+</div>
