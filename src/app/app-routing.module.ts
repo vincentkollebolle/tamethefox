@@ -1,21 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ChatComponent } from './chat/chat.component';
-import {IsSignedInGuardGuard } from './is-signed-in-guard.guard';
-import { SignInComponent } from './sign-in/sign-in.component';
+import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { ChatComponent } from './chat/chat.component';
+import { AuthGuard } from './guard/auth.guard';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  { path: '', component: SignInComponent, pathMatch: 'full' },
-  { path: 'signin', component: SignInComponent, pathMatch: 'full' },
+  { path: '', component: AppComponent, pathMatch: 'full',  canActivate: [AuthGuard] },
+  { path: 'signin', component: SigninComponent, pathMatch: 'full' },
   { path: 'signup', component: SignupComponent, pathMatch: 'full' },
-  {
-    path: 'chat',
-    component: ChatComponent,
-    canActivate: [
-      IsSignedInGuardGuard
-    ]
-  },
+  { path: 'chat', component: ChatComponent,  canActivate: [AuthGuard] },
 ];
 
 @NgModule({

@@ -11,7 +11,10 @@
   },
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@babel/compat-data": "7.8.0",
+=======
+>>>>>>> cae95ea777f371973bcf2b9d57faa66a45e98e17
     "@angular/animations": "~8.2.14",
     "@angular/common": "~8.2.14",
     "@angular/compiler": "~8.2.14",
@@ -23,8 +26,11 @@
     "@angular/router": "~8.2.14",
     "bootstrap": "^4.4.1",
     "firebase": "^7.13.1",
+<<<<<<< HEAD
     "jquery": "^3.4.1",
     "popper": "^1.0.1",
+=======
+>>>>>>> cae95ea777f371973bcf2b9d57faa66a45e98e17
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

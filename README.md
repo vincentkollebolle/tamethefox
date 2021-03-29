@@ -9,6 +9,7 @@ Basé sur [Angular](https://angular.io/).
 ## Rermeciement.
 
 * Vive le pesto.
+* Vincent Callierez
 * Adlibitum.
 
 # Tame The Fox
@@ -74,6 +75,5 @@ Cliquer sur « _*changer mon humeur*_ »  et choisissez votre nouvelle humeur.
 Parlez avec cette personne jusqu’a il ou elle change son humeur ;)
 
 ## Je crois que je sais tout ce que je dois savoir !
-
 Alors c'est parti !  
 http://www.tamethefox.art

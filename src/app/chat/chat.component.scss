@@ -1,8 +1,12 @@
-strong { font-weight: bold;font-size:1.3rem;}
-.userlist li { cursor: pointer;}
-.userlist li:hover { background: #efefef;color:black;}
-.chatRoomMood img { width:40%; }
-.navbar { background:white;}
-.list-group-item {
-  padding: .25rem 1.25rem;
+.active { background: #ffc078 !important; }
+img { width:30px; }
+
+.userlist li:hover { 
+    background: #ffc078;
+    cursor: pointer;
+}
+.alert-warning {
+    color: #856404;
+    background-color: #fff4e6;
+    border-color: #fff4e6;
 }

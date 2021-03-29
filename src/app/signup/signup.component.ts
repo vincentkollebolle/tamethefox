@@ -1,7 +1,9 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from './../service/auth.service';
-import { Router } from '@angular/router';
+import { FireauthService } from './../service/fireauth.service';
+import { AlertService } from './../service/alert.service';
+
 
 @Component({
   selector: 'app-signup',
@@ -9,13 +11,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-
+  
   signupForm: FormGroup;
-  errorMessage: string;
 
-  constructor(private formBuilder: FormBuilder,
-              private authSrv: AuthService,
-              private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    public fireauthSrv: FireauthService,
+    private alertService: AlertService
+  ) { } 
 
   ngOnInit() {
     this.initForm();
@@ -24,21 +27,15 @@ export class SignupComponent implements OnInit {
   initForm() {
     this.signupForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
+      password: ['', [Validators.required ]]
     });
   }
 
   onSubmit() {
     const email = this.signupForm.get('email').value;
     const password = this.signupForm.get('password').value;
-
-    this.authSrv.createNewUser(email, password).then(
-      () => {
-        this.router.navigate(['/chat']);
-      },
-      (error) => {
-        this.errorMessage = error;
-      }
-    );
+    this.alertService.info('Création en cours ...', { autoClose: false,keepAfterRouteChange: false});
+    this.fireauthSrv.signUp(email,password);
   }
-}
+
+}  

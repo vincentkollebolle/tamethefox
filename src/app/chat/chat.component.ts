@@ -7,13 +7,11 @@ import {
   ComponentFactoryResolver,
   ComponentRef,
 } from '@angular/core';
-
-import { User } from './../user';
-import { AuthService} from './../service/auth.service';
-import { UserService } from './../user.service';
-import { ChatpanelComponent } from './../chatpanel/chatpanel.component';
-import { Observable, from, of } from "rxjs";
+import { FireauthService } from './../service/fireauth.service';
+import { AlertService } from './../service/alert.service';
+import { UserService } from '../service/user.service';
 import { map } from 'rxjs/operators';
+import { ChatpanelComponent } from './../chatpanel/chatpanel.component';
 
 @Component({
   selector: 'app-chat',
@@ -24,62 +22,34 @@ export class ChatComponent implements OnInit {
 
   @ViewChild("chatpanelsContainer", { read: ViewContainerRef ,static: true }) container;
 
-
   //so index is a unique property here to identify each component individually.
   index: number = 0;
   componentsReferences = [];
-  showmyprofile = true;
 
-  userList: Observable<User[]>;
-  connectedUser: Observable<User>;
-  sunnyUsers;
-  cloudsUsers;
-  questionsUsers;
+  userList$;
+  sunnyUsers$;
+  cloudsUsers$;
+  questionsUsers$;
+
+  userActivePanel; //contient le user du chatpanel actuellement ouvert, null sinon.
 
   constructor(
-    private authSrv: AuthService,
-    private usrSrv: UserService,
+    public fireauthSrv: FireauthService,
+    public alertSrv: AlertService,
+    public userSrv: UserService,
     private resolver: ComponentFactoryResolver) { }
 
-
   ngOnInit() {
-    //get ConnectedUser
-    this.connectedUser = this.usrSrv.getConnectedUser();
-
-    this.userList = this.usrSrv.getUsers();
-    //get users of the chat
-    /*this.usrSrv.getUsers().subscribe(data => {
-      this.userList = data.map(e => {
-        return {
-          id: e.id,
-          timestamp: e.timestamp.toDate(),
-          mood: e.mood,
-          email: e.email
-        } as User;
-      })
-    });*/
-
-    //get sunny users
-    this.usrSrv.getUsers()
-    .pipe(map(users => users.filter(user => user.mood == 'sunny' ))).subscribe(value => this.sunnyUsers = value);
-
-    //get clouds users
-    this.usrSrv.getUsers()
-    .pipe(map(users => users.filter(user => user.mood == 'clouds' ))).subscribe(value => this.cloudsUsers = value);
-
-    //get questions users
-    this.usrSrv.getUsers()
-    .pipe(map(users => users.filter(user => user.mood == 'questions' ))).subscribe(value => this.questionsUsers = value);
-
-  }
-
-  hideAllComponents() {
-    this.componentsReferences.forEach((cf) => {
-      cf.instance.hideChatpanel = true;
-    });
+    this.userList$ = this.userSrv.getUsers();
+    this.userSrv.getUsers().pipe(map(users => users.filter(user => user.mood == 'sunny' ))).subscribe(value => this.sunnyUsers$ = value);
+    this.userSrv.getUsers().pipe(map(users => users.filter(user => user.mood == 'clouds' ))).subscribe(value => this.cloudsUsers$ = value);
+    this.userSrv.getUsers().pipe(map(users => users.filter(user => user.mood == 'questions' ))).subscribe(value => this.questionsUsers$ = value);
   }
 
   createComponent(from, to,i) {
+    //on met à jour le user actif (le chatpanel courant)
+    this.userActivePanel = to;
+
     //si on a pas de référence à ce composant dans componentList.
     if(!this.componentsReferences.filter(x => x.instance.to == to)[0]) {
       //cacher tous les composant existant
@@ -92,6 +62,7 @@ export class ChatComponent implements OnInit {
       componentRef.instance.to = to;
       componentRef.instance.close.subscribe(() => {
         componentRef.instance.close.unsubscribe();
+        this.userActivePanel = null;//reset active chatpanel user
         this.componentsReferences = this.componentsReferences.filter(x => x.instance.index !== componentRef.instance.index);
         componentRef.destroy();
       });
@@ -106,24 +77,16 @@ export class ChatComponent implements OnInit {
     }
   }
 
+  hideAllComponents() {
+    this.componentsReferences.forEach((cf) => {
+      cf.instance.hideChatpanel = true;
+    });
+  }
 
   private destroyComponent(index: number) {
     alert("Destroy composant");
     let componentRef = this.componentsReferences.filter(x => x.instance.index == index)[0];
     componentRef.instance.close.next();
   }
-
-  selectUser(user) {
-    //this.currentUser = user;
-  }
-
-  toggleViewMyProfile() {
-    this.showmyprofile = !this.showmyprofile;
-  }
-
-  logout() {
-    this.authSrv.signOutUser()
-  }
-
 
 }

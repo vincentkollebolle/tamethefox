@@ -1,43 +1,37 @@
-<div class="containerLogin">
-  <div class="contentLogin">
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <img src="assets/img/foxlogo.jpg" class="logo" alt="tame the fox">
-      </div>
-    </div>
-    <!--title-->
-    <div class="row my-2">
-      <div class="col-md-12 text-center">
-        <h1 class="title">
-          Tame the Fox !
-        </h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 ">
-        <h4 class="title">Créer un compte</h4>
-        <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <input type="text"
-                   id="email"
-                   class="form-control"
-                   formControlName="email"
-                   placeholder="Votre email">
-          </div>
-          <div class="form-group">
-            <input type="password"
-                   id="password"
-                   class="form-control"
-                   formControlName="password"
-                   placeholder="Choisissez un mot de passe">
-          </div>
-          <button class="btn btn-primary"
-                  type="submit"
-                  [disabled]="signupForm.invalid">Créer mon compte</button>
-          <button class="btn btn-outline-primary ml-2" routerLink="/signin">Retour</button>
-        </form>
-        <p class="text-danger">{{ errorMessage }}</p>
-      </div>
-    </div>
-  </div>
-</div>
+<app-alert></app-alert>
+<form 
+    class="form-signup"
+    [formGroup]="signupForm" 
+    (ngSubmit)="onSubmit()">
+    <app-logo></app-logo>
+    <h1 class="h3 mb-3 font-weight-normal title">Tame the Fox !</h1>
+    <h2 class="title text-center h4 mb-3">Créer un compte</h2>
+    
+    <!-- email-->
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="text"
+      id="email"
+      class="form-control"
+      type="email"
+      formControlName="email"
+      placeholder="Votre email">
+    <!--password-->
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password"
+      id="password"
+      class="form-control"
+      formControlName="password"
+      placeholder="Votre mot de passe"
+      required>
+
+    <!--bouton submit-->
+    <button 
+      type="submit"
+      class="btn btn-lg btn-primary btn-block"
+      [disabled]="signupForm.invalid">Créer mon compte</button>
+
+    <!--create account-->
+    <p class="mt-5 mb-3 text-muted text-center">
+      <a [routerLink]="['/signin']">J'ai déjà un compte</a>
+    </p>
+</form>

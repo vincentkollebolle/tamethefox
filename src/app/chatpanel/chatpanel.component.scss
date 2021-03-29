@@ -1,52 +1,61 @@
+/* https://yeun.github.io/open-color/#yellow */
 .btn-group.special {
-  display: flex;
-}
-
-.special .btn {
-  flex: 1
-}
-.chatmessages {
-  height: 590px;
-  overflow: scroll;
-}
-.profile {
-  overflow: scroll;
-  height:390px;
-}
-.chat.card {
-  border-bottom: 0;
-  border-right:0;
-  border-left:0;
-  width:70%;
-}
-.chat .card-header {
-  padding: 5px;
-  background: white;
-  border-bottom: 0;
-  border-right: 1px solid #efefef;
-  border-left: 1px solid #efefef;
-  color: #007bff;
-}
-.chat .card-header img {
-  width:5%;
-}
-.chat .card-body {
-  padding: 5px 10px;
-  border-right: 1px solid #efefef;
-  border-left: 1px solid #efefef;
-}
-.chat .card-footer {
-  padding:5px;
-  text-align:right;
-  background:white;
-}
-
-.fromto {
-  float: right !important;
-  background: #efefef;
-}
-.fromto .card-header {
-  background:#efefef;
-}
-.tofrom {}
-.profilemsg { border: 1px solid #efefef; }
+    display: flex;
+  }
+  
+  .special .btn {
+    flex: 1
+  }
+  .chatmessages {
+    height: 483px;
+    overflow: scroll;
+  }
+  .profile {
+    overflow: scroll;
+    max-height:355px;
+  }
+  .chat.card {
+    border-bottom: 0;
+    border-right:0;
+    border-left:0;
+    width:70%;
+  }
+  .chat .card-header {
+    padding: 5px;
+    background: white;
+    border-bottom: 0;
+    border-right: 1px solid #efefef;
+    border-left: 1px solid #efefef;
+    color: #007bff;
+  }
+  .chat .card-header img {
+    width:5%;
+  }
+  .chat .card-body {
+    padding: 5px 10px;
+    border-right: 1px solid #efefef;
+    border-left: 1px solid #efefef;
+  }
+  .chat .card-footer {
+    padding:5px;
+    text-align:right;
+    background:white;
+  }
+  
+  .fromto {
+    float: right !important;
+    background: #ffc078;
+  }
+  .fromto .card-header {
+    background:#ffc078;
+  }
+  .tofrom {
+    background:#fff4e6;
+  }
+  .tofrom .card-header {
+    background:#fff4e6;
+  }
+  .profilemsg { 
+    background:#fff4e6;
+    border: 1px solid #efefef; }
+  img { width:30px;}

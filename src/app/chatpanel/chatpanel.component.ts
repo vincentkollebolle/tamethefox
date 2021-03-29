@@ -1,8 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { ChatService } from '../chat.service';
-import { UserService } from '../user.service';
-import { ProfileService } from '../profile.service';
 import { Subject } from 'rxjs';
+import { ChatService } from '../service/chat.service';
+import { ProfileService } from '../service/profile.service';
 
 @Component({
   selector: 'app-chatpanel',
@@ -11,12 +10,7 @@ import { Subject } from 'rxjs';
 })
 export class ChatpanelComponent implements OnInit {
 
-  connectedUser;
-  selectedBox = "profilebox";
-  chatMessages; // chatmessages on the server
   msg2send ;  //the message to send (ngModel)
-  profilEntry2send;
-  profileEntries;
 
   // The user we want to chat to
   @Input('from') from;
@@ -28,29 +22,29 @@ export class ChatpanelComponent implements OnInit {
   //In order to be abble to be closed, a subject
   close = new Subject<boolean>();
 
+  chatMessages;
+  profilEntry2send;
+  profileEntries;
+  
   constructor(
     private chatSrv: ChatService,
-    private profileSrv: ProfileService,
-    private userSrv: UserService) { }
+    private profileSrv: ProfileService
+  ) { }
 
   ngOnInit() {
-    //getConnectedUser
-    this.connectedUser = this.userSrv.getConnectedUser();
-    //get message of ConnectedUser
-
-    this.chatSrv.getEntries(this.from, this.to).subscribe(data => {
-      this.chatMessages = data.map(e => {
+    //get chat messages
+    this.chatSrv.getEntries().subscribe(data => {
+      this.chatMessages = data.map(message => {
         return {
-          createdAt: e.createdAt.toDate(),
-          from: e.from,
-          fromTimestamp: e.fromTimestamp,
-          mood: e.mood,
-          to: e.to,
-          content: e.content
+          createdAt: message.createdAt.toDate(),
+          from: message.from,
+          mood: message.mood,
+          to: message.to,
+          content: message.content
         };
       })
     });
-
+    //get profile messages
     this.profileSrv.getEntries(this.to).subscribe(data => {
       this.profileEntries = data.map(e => {
         return {
@@ -62,10 +56,6 @@ export class ChatpanelComponent implements OnInit {
         };
       })
     });
-  }
-
-  selectBox(boxname) {
-    this.selectedBox = boxname;
   }
 
   sendMessage(){

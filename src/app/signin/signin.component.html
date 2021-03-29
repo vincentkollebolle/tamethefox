@@ -1,0 +1,36 @@
+<app-alert></app-alert>
+<form 
+    class="form-signin"
+    [formGroup]="signinForm" 
+    (ngSubmit)="onSubmit()">
+    <app-logo></app-logo>
+    <h1 class="h3 mb-3 font-weight-normal title">Tame the Fox !</h1>
+    
+    <!-- email-->
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="text"
+      id="email"
+      class="form-control"
+      type="email"
+      formControlName="email"
+      placeholder="Votre email">
+    <!--password-->
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password"
+      id="password"
+      class="form-control"
+      formControlName="password"
+      placeholder="Votre mot de passe"
+      required>
+
+    <!--bouton submit-->
+    <button 
+      type="submit"
+      class="btn btn-lg btn-outline-primary btn-block"
+      [disabled]="signinForm.invalid">Connexion</button>
+
+    <!--create account-->
+    <p class="mt-5 mb-3 text-muted text-center">
+      <a [routerLink]="['/signup']">Créer un compte</a>
+    </p>
+</form>
